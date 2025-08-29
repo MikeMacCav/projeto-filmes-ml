@@ -13,11 +13,6 @@ app.use(express.json());
 // Servir arquivos estáticos da pasta "public"
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Rota raiz
-app.get("/", (req, res) => {
-  res.send("🚀 Servidor funcionando! Acesse /health para verificar o status ou coloque seus arquivos em /public.");
-});
-
 // Rota de healthcheck
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok", message: "Servidor rodando!" });
