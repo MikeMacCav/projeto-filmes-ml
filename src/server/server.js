@@ -11,7 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // Servir arquivos estáticos da pasta "public"
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../../public")));
+
+// Rota principal para devolver o index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
+});
+
 
 // Rota de healthcheck
 app.get("/health", (req, res) => {
