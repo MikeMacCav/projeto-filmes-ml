@@ -1,0 +1,88 @@
+// src/server/server.js
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const mysql = require("mysql2/promise");
+require("dotenv").config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middlewares
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../../public")));
+
+// Configuração do banco
+const pool = mysql.createPool({
+  host: process.env.RDS_HOST,
+  user: process.env.RDS_USER,
+  password: process.env.RDS_PASSWORD,
+  database: process.env.RDS_DB,
+  port: process.env.DB_PORT || 3306
+});
+
+// ------------------- CRUD ------------------- //
+
+// Criar um filme
+app.post("/filmes", async (req, res) => {
+  const { titulo, diretor, ano, genero } = req.body;
+  try {
+    const [result] = await pool.query(
+      "INSERT INTO filmes (titulo, diretor, ano, genero) VALUES (?, ?, ?, ?)",
+      [titulo, diretor, ano, genero]
+    );
+    res.status(201).json({ id: result.insertId, titulo, diretor, ano, genero });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erro ao inserir filme" });
+  }
+});
+
+// Listar filmes
+app.get("/filmes", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM filmes");
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao buscar filmes" });
+  }
+});
+
+// Atualizar filme
+app.put("/filmes/:id", async (req, res) => {
+  const { id } = req.params;
+  const { titulo, diretor, ano, genero } = req.body;
+  try {
+    await pool.query(
+      "UPDATE filmes SET titulo=?, diretor=?, ano=?, genero=? WHERE id=?",
+      [titulo, diretor, ano, genero, id]
+    );
+    res.json({ id, titulo, diretor, ano, genero });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao atualizar filme" });
+  }
+});
+
+// Deletar filme
+app.delete("/filmes/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM filmes WHERE id=?", [id]);
+    res.json({ message: "Filme deletado com sucesso" });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao deletar filme" });
+  }
+});
+
+// -------------------------------------------- //
+
+// Healthcheck
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Servidor rodando!" });
+});
+
+// Inicializa servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
