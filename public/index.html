@@ -2,11 +2,98 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Servidor Funcionando 🚀</title>
+  <title>CRUD de Filmes</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f9; }
+    h1 { color: #333; }
+    .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; }
+    input, button { margin: 5px 0; padding: 8px; }
+    button { cursor: pointer; }
+    .filme { border-bottom: 1px solid #ddd; padding: 10px 0; }
+  </style>
 </head>
 <body>
-  <h1>Servidor rodando com Express + EC2 ✅</h1>
-  <p>Se você está vendo esta página, deu certo!</p>
+  <div class="container">
+    <h1>🎬 CRUD de Filmes</h1>
+
+    <!-- CREATE -->
+    <h2>Adicionar Filme</h2>
+    <input id="titulo" placeholder="Título">
+    <input id="diretor" placeholder="Diretor">
+    <input id="ano" placeholder="Ano" type="number">
+    <input id="genero" placeholder="Gênero">
+    <button onclick="criarFilme()">Adicionar</button>
+
+    <!-- READ -->
+    <h2>Lista de Filmes</h2>
+    <button onclick="listarFilmes()">Carregar Filmes</button>
+    <div id="lista"></div>
+
+    <!-- UPDATE -->
+    <h2>Atualizar Filme</h2>
+    <input id="idUpdate" placeholder="ID do Filme" type="number">
+    <input id="tituloUpdate" placeholder="Novo Título">
+    <input id="diretorUpdate" placeholder="Novo Diretor">
+    <input id="anoUpdate" placeholder="Novo Ano" type="number">
+    <input id="generoUpdate" placeholder="Novo Gênero">
+    <button onclick="atualizarFilme()">Atualizar</button>
+
+    <!-- DELETE -->
+    <h2>Deletar Filme</h2>
+    <input id="idDelete" placeholder="ID do Filme" type="number">
+    <button onclick="deletarFilme()">Deletar</button>
+  </div>
+
+  <script>    
+    const API_URL = "http://54.162.130.167:3000/filmes";
+
+      async function criarFilme() {
+      const titulo = document.getElementById("titulo").value;
+      const diretor = document.getElementById("diretor").value;
+      const ano = document.getElementById("ano").value;
+      const genero = document.getElementById("genero").value;
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ titulo, diretor, ano, genero })
+      });
+      alert("Filme adicionado!");
+      listarFilmes();
+    }
+
+    async function listarFilmes() {
+      const res = await fetch(API_URL);
+      const filmes = await res.json();
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+      filmes.forEach(f => {
+        lista.innerHTML += `<div class="filme"><b>ID:</b> ${f.id} | <b>${f.titulo}</b> - ${f.diretor} (${f.ano}) [${f.genero}]</div>`;
+      });
+    }
+
+    async function atualizarFilme() {
+      const id = document.getElementById("idUpdate").value;
+      const titulo = document.getElementById("tituloUpdate").value;
+      const diretor = document.getElementById("diretorUpdate").value;
+      const ano = document.getElementById("anoUpdate").value;
+      const genero = document.getElementById("generoUpdate").value;
+
+      await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ titulo, diretor, ano, genero })
+      });
+      alert("Filme atualizado!");
+      listarFilmes();
+    }
+
+    async function deletarFilme() {
+      const id = document.getElementById("idDelete").value;
+      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      alert("Filme deletado!");
+      listarFilmes();
+    }
+  </script>	
 </body>
 </html>
-
