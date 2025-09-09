@@ -1,4 +1,4 @@
-const API_URL = "http://54.162.130.167:3000/filmes";
+const API_URL = "/filmes";
 
 // Adicionar Filme
 document.querySelector("#btnAdd").addEventListener("click", async () => {
