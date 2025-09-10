@@ -29,6 +29,12 @@
     <button onclick="listarFilmes()">Carregar Filmes</button>
     <div id="lista"></div>
 
+    <!-- GET POR ID -->
+    <h2>Buscar Filme por ID</h2>
+    <input id="idBuscar" placeholder="ID do Filme" type="number">
+    <button onclick="buscarFilme()">Buscar</button>
+    <div id="resultadoBuscar"></div>
+
     <!-- UPDATE -->
     <h2>Atualizar Filme</h2>
     <input id="idUpdate" placeholder="ID do Filme" type="number">
@@ -47,13 +53,13 @@
   <script>    
     const API_URL = "/filmes";
 
-      async function criarFilme() {
+    async function criarFilme() {
       const titulo = document.getElementById("titulo").value;
       const diretor = document.getElementById("diretor").value;
       const ano = document.getElementById("ano").value;
       const genero = document.getElementById("genero").value;
 
-      const res = await fetch(API_URL, {
+      await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ titulo, diretor, ano, genero })
@@ -70,6 +76,21 @@
       filmes.forEach(f => {
         lista.innerHTML += `<div class="filme"><b>ID:</b> ${f.id} | <b>${f.titulo}</b> - ${f.diretor} (${f.ano}) [${f.genero}]</div>`;
       });
+    }
+
+    async function buscarFilme() {
+      const id = document.getElementById("idBuscar").value;
+      const res = await fetch(`${API_URL}/${id}`);
+      const resultado = document.getElementById("resultadoBuscar");
+
+      if (res.status === 404) {
+        resultado.innerHTML = "❌ Filme não encontrado";
+        return;
+      }
+
+      const filme = await res.json();
+      resultado.innerHTML =
+        `<div class="filme"><b>ID:</b> ${filme.id} | <b>${filme.titulo}</b> - ${filme.diretor} (${filme.ano}) [${filme.genero}]</div>`;
     }
 
     async function atualizarFilme() {
@@ -94,6 +115,6 @@
       alert("Filme deletado!");
       listarFilmes();
     }
-  </script>	
+  </script>
 </body>
 </html>
