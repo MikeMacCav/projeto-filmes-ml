@@ -101,9 +101,11 @@ CREATE TABLE filmes (
 ## 🔹 Filmes
 
 - Criar filme
+<img width="1439" height="853" alt="image" src="https://github.com/user-attachments/assets/9333da0c-1c83-4c7d-9c9f-573ac622ad3e" />
 
 - POST /filmes
 - Content-Type: application/json
+<img width="902" height="803" alt="image" src="https://github.com/user-attachments/assets/43aa293e-018e-4c3c-9acb-dd6d357617cc" />
 
 - {
   - "titulo": "Matrix",
@@ -121,6 +123,8 @@ CREATE TABLE filmes (
 - ```http
 - GET /filmes
 - ✔️ Retorna todos os filmes cadastrados no banco.
+<img width="1397" height="723" alt="image" src="https://github.com/user-attachments/assets/d3e01691-4e89-467c-9420-87652af5924a" />
+
 
 ## Buscar filme por ID
 
