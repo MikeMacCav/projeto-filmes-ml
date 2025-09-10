@@ -31,6 +31,19 @@ O sistema expõe tanto uma **API REST JSON** quanto uma **interface web simples*
 ---
 ## Imagens do CRUD funcionando:
 
+## Adicionando um filme:
+<img width="1439" height="819" alt="image" src="https://github.com/user-attachments/assets/30af61ed-7822-4199-b980-a643fdcb72c3" />
+
+## Listando todos os filmes cadastrados:
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/82dc3ac0-d9f5-40ea-8347-5abb44d6d0a1" />
+
+## Busca de filme por ID:
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/9a94af41-361b-4282-94fa-2bdbb4894eee" />
+
+## Atualizando Dados de Filme:
+<img width="1434" height="769" alt="image" src="https://github.com/user-attachments/assets/9c1d35e0-cc71-4579-973e-eebf5af123dc" />
+
+
 ## Deletando um filme:
 <img width="1324" height="716" alt="image" src="https://github.com/user-attachments/assets/d614a05d-afc7-49f7-899d-1344d6ca2a6d" />
 
