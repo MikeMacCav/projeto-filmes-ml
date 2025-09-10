@@ -127,6 +127,7 @@ CREATE TABLE filmes (
 
 
 ## Buscar filme por ID
+<img width="1284" height="868" alt="image" src="https://github.com/user-attachments/assets/d269cec9-f2da-4c1d-9d74-dc37f8385665" />
 
 - http
 - Copiar código
@@ -135,6 +136,7 @@ CREATE TABLE filmes (
 - ❌ Se não existir, retorna 404 - Filme não encontrado.
 
 ## Atualizar filme
+<img width="1298" height="709" alt="image" src="https://github.com/user-attachments/assets/bfee43e3-3550-4706-a8b5-8eea6c475172" />
 
 - http
 - Copiar código
@@ -151,6 +153,8 @@ CREATE TABLE filmes (
 -❌ Se o id não existir, retorna 404 - Filme não encontrado.
 
 ## Deletar filme
+<img width="1205" height="718" alt="image" src="https://github.com/user-attachments/assets/984e964d-c3b2-4d97-9e69-69fe6c4f9895" />
+<img width="1324" height="716" alt="image" src="https://github.com/user-attachments/assets/08b6efec-bfac-4bae-a9fa-b101e57403ff" />
 
 - http
 - Copiar código
