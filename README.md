@@ -1,5 +1,4 @@
 # 🎬 CRUD de Filmes - Projeto em Node.js, Express e MySQL (AWS RDS + EC2)
-<img width="1324" height="716" alt="image" src="https://github.com/user-attachments/assets/81db45e0-e8b8-4d8b-bc6e-0ff9779ce09f" />
 
 Este projeto implementa um sistema **CRUD (Create, Read, Update, Delete)** de filmes, utilizando:
 - **Node.js + Express** para o backend  
@@ -30,6 +29,11 @@ O sistema expõe tanto uma **API REST JSON** quanto uma **interface web simples*
 - HTML, CSS e JavaScript (frontend simples)  
 
 ---
+## Imagens do CRUD funcionando:
+
+## Deletando um filme:
+<img width="1324" height="716" alt="image" src="https://github.com/user-attachments/assets/d614a05d-afc7-49f7-899d-1344d6ca2a6d" />
+
 
 ## ⚙️ Configuração do Ambiente
 
